@@ -1,7 +1,7 @@
 # source: Paper_Review
 baseurl: "/"
 permalink: pretty
-title: "hahaha"
+title: "Yonsei ICL Paper Reviews"
 collections_dir: collections
 markdown: kramdown
 highlighter: rouge
