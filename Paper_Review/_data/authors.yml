@@ -1,0 +1,11 @@
+sage_kirk:
+  name: 'Sage Kirk'
+  image: 'assets/images/author/sage-kirk.jpg'
+  twitter: '@zerostaticio'
+mike_vance:
+  name: 'Mike Vance'
+  image: 'assets/images/author/mike-vance.jpg'
+  twitter: '@zerostaticio'
+승환_이:
+  name: '승환 이'
+  image: 'assets/images/author/seunghwan-lee.jpg'
