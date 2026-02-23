@@ -1,4 +1,4 @@
-baseurl: "/Paper_Review"
+baseurl: "/Paper_Review/"
 permalink: pretty
 title: "hahaha"
 collections_dir: collections
