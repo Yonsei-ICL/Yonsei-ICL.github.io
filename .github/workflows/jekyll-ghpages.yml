@@ -45,6 +45,14 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+      - name: List files
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Contents of current directory:"
+          ls -la
+          echo "Contents of _site:"
+          ls -la _site || echo "_site not found in current directory"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
