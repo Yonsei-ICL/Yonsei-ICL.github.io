@@ -5,9 +5,11 @@ body_classes: page-category
 
 {% include heading.html heading=page.title description=page.description %}
 
-<main class="pb-6 md:pb-12">
+<main class="py-6">
   {% assign category = page.title %}
   {% for post in site.categories[category] %}
-    {% include summary-category.html post=post %}
+  <div class="mb-12">
+    {% include summary.html post=post %}
+  </div>
   {% endfor %}
 </main>

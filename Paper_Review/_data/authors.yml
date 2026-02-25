@@ -6,6 +6,33 @@ mike_vance:
   name: 'Mike Vance'
   image: 'assets/images/author/mike-vance.jpg'
   twitter: '@zerostaticio'
+미단_심:
+  name: '심미단'
+  image: 'assets/images/author/seunghwan-lee.jpg'
+규환_염:
+  name: '염규환'
+  image: 'assets/images/author/seunghwan-lee.jpg'
+효준_최:
+  name: '최효준'
+  image: 'assets/images/author/seunghwan-lee.jpg'
+혜림_양:
+  name: '양혜림'
+  image: 'assets/images/author/seunghwan-lee.jpg'
+민영_최:
+  name: '최민영'
+  image: 'assets/images/author/seunghwan-lee.jpg'
 승환_이:
-  name: '승환 이'
+  name: '이승환'
+  image: 'assets/images/author/seunghwan-lee.jpg'
+의진_한:
+  name: '한의진'
+  image: 'assets/images/author/seunghwan-lee.jpg'
+두호_이:
+  name: '이두호'
+  image: 'assets/images/author/seunghwan-lee.jpg'
+문규_김:
+  name: '김문규'
+  image: 'assets/images/author/seunghwan-lee.jpg'
+석주_황:
+  name: '황석주'
   image: 'assets/images/author/seunghwan-lee.jpg'

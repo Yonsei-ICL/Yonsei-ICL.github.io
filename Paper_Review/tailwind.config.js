@@ -4,6 +4,11 @@ module.exports = {
   purge: ["./_includes/**/*.html", "./_layouts/**/*.html", "./blog/*.html", "./_posts/*.html", "./*.html"],
   darkMode: false,
   theme: {
+    extend: {
+      fontFamily: {
+        sans: ['"Noto Sans KR"', ...defaultTheme.fontFamily.sans],
+      },
+    },
     screens: {
       sm: "640px",
       md: "768px",

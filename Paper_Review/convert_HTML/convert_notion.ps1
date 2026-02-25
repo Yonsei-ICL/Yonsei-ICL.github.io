@@ -144,6 +144,9 @@ try {
     # Remove Google profile images from person property
     $articleContent = $articleContent -replace '<img src="https://lh3\.googleusercontent\.com/[^"]*"\s*class="icon user-icon"/>', ''
     
+    # Remove properties table (Person, Status, date, keywords, etc.)
+    $articleContent = $articleContent -replace '(?s)<table class="properties">.*?</table>', ''
+    
     $filenameBase = Clean-Filename -Title $title
     
     # Create blog image folders (relative to batch file location)
