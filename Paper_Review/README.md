@@ -252,8 +252,10 @@ To build the theme.
 bundle exec jekyll build
 ```
 
-## Deployment
+Our website was built using the following open-source software. 
+(https://www.zerostatic.io/theme/jekyll-atlantic/)
 
+We adhere to the license terms of the site as they are.
 ### Netlify
 
 Use Netlify to deploy this theme. This theme contains a valid and tested `netlify.toml`
