@@ -252,6 +252,7 @@ To build the theme.
 bundle exec jekyll build
 ```
 
+### Important
 Our website was built using the following open-source software. 
 (https://www.zerostatic.io/theme/jekyll-atlantic/)
 
