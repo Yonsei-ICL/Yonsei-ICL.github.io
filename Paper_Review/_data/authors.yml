@@ -1,11 +1,9 @@
 sage_kirk:
   name: 'Sage Kirk'
   image: 'assets/images/author/sage-kirk.jpg'
-  twitter: '@zerostaticio'
 mike_vance:
   name: 'Mike Vance'
   image: 'assets/images/author/mike-vance.jpg'
-  twitter: '@zerostaticio'
 미단_심:
   name: '심미단'
   image: 'assets/images/author/seunghwan-lee.jpg'

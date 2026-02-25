@@ -14,9 +14,9 @@ sass:
 google_analytics_id: false # replace with "UA-XXXX"
 
 logo:
-  logo_desktop_image: assets/images/logo/logo.svg
-  logo_desktop_text: "Jekyll <strong>Atlantic</strong>"
-  logo_mobile_image: assets/images/logo/logo-mobile.svg
+  logo_desktop_image: /assets/images/logo/icl_logos.jpg
+  logo_desktop_text: "Yonsei Univ. <strong>ICL</strong>"
+  logo_mobile_image: /assets/images/logo/icl_logos.jpg
   logo_mobile_text: ""
   logo_desktop_height: "36px"
   logo_desktop_width: "36px"
@@ -24,9 +24,10 @@ logo:
   logo_mobile_width: "36px"
 
 seo:
-  meta_twitter_site: "@zerostaticio"
-  meta_twitter_creator: "@zerostaticio"
-  meta_og_image: "https://www.zerostatic.io/theme/jekyll-atlantic/jekyll-atlantic-screenshot.png"
+  meta_twitter_site: "https://icl.yonsei.ac.kr/"
+  meta_twitter_creator: "https://icl.yonsei.ac.kr/"
+  # meta_og_image: "https://www.zerostatic.io/theme/jekyll-atlantic/jekyll-atlantic-screenshot.png"
+  meta_og_image: ""
 
 plugins:
   - jekyll-environment-variables

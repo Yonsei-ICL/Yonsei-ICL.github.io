@@ -1,12 +1,7 @@
 [
   {
-    "name": "Github",
-    "link": "https://github.com/zerostaticthemes/jekyll-atlantic-theme",
-    "image": "https://simpleicons.org/icons/github.svg"
-  },
-  {
-    "name": "Twitter",
-    "link": "https://twitter.com/zerostaticio",
-    "image": "https://simpleicons.org/icons/twitter.svg"
+    "name": "Homepage",
+    "link": "https://icl.yonsei.ac.kr/",
+    "image": "../assets/images/logo/icl_logos.jpg"
   }
 ]
