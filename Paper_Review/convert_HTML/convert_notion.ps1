@@ -20,6 +20,18 @@ function Extract-Title {
 
 function Extract-Date {
     param([string]$Content)
+
+    if ($Content -match '@([A-Za-z]+)\s+([0-9]{1,2}),\s+([0-9]{4})') {
+        $monthText = $matches[1]
+        $day = $matches[2].PadLeft(2, '0')
+        $year = $matches[3]
+        try {
+            $month = [datetime]::ParseExact($monthText, 'MMMM', [System.Globalization.CultureInfo]::InvariantCulture).Month.ToString('00')
+            return "$year-$month-$day"
+        } catch {
+            # ignore and continue fallback parsing
+        }
+    }
     
     if ($Content -match '@(\d{4})\S+ (\d{1,2})\S+ (\d{1,2})\S+') {
         $year = $matches[1]
@@ -54,12 +66,57 @@ function Extract-Description {
 function Extract-Person {
     param([string]$Content)
     
-    # Extract person name from user-icon
-    if ($Content -match 'class="icon user-icon"[^>]*/>([^<]+)</span>') {
+    # Extract person name from properties table (before it's removed)
+    if ($Content -match 'property-row-person[^>]*>.*?<img[^>]*/>([^<]+)</span>') {
         return $matches[1].Trim()
     }
     
     return ""
+}
+
+function Resolve-AuthorKey {
+    param(
+        [string]$PersonName,
+        [string]$PaperReviewRoot
+    )
+
+    if ([string]::IsNullOrWhiteSpace($PersonName)) {
+        return ""
+    }
+
+    $authorsPath = Join-Path $PaperReviewRoot "_data\authors.yml"
+    if (-not (Test-Path $authorsPath)) {
+        return $PersonName
+    }
+
+    $lines = Get-Content -Path $authorsPath -Encoding UTF8
+    $currentKey = ""
+
+    foreach ($line in $lines) {
+        if ($line -match '^([^:#]+):\s*$') {
+            $currentKey = $matches[1].Trim()
+            continue
+        }
+
+        if ($currentKey -ne "" -and $line -match '^\s+name:\s*[''\"]?(.*?)[''\"]?\s*$') {
+            $nameInFile = $matches[1].Trim()
+            if ($nameInFile -eq $PersonName) {
+                return $currentKey
+            }
+            $currentKey = ""
+        }
+    }
+
+    return $PersonName
+}
+
+function To-CategorySlug {
+    param([string]$Category)
+
+    $slug = $Category.ToLower()
+    $slug = $slug -replace '[^\p{L}\p{Nd}\s-]', ''
+    $slug = $slug -replace '\s+', '-'
+    return $slug.Trim('-')
 }
 
 function Extract-Keywords {
@@ -79,7 +136,7 @@ function Extract-Keywords {
             }
         }
         
-        return $keywords
+        return ,$keywords
     }
     
     return @()
@@ -181,7 +238,8 @@ try {
     
     # Add authors if person exists
     if ($person -ne "") {
-        $frontMatter += "authors: [`"$person`"]`n"
+        $authorKey = Resolve-AuthorKey -PersonName $person -PaperReviewRoot $paperReviewRoot
+        $frontMatter += "authors: [`"$authorKey`"]`n"
     }
     
     # Add categories (keywords + research)
@@ -203,6 +261,48 @@ try {
     }
     
     $frontMatter += "$thumbnailImagePath---`n`n"
+    
+    $jekyllContent = $frontMatter + $articleContent
+    
+    # Create category files for any new keywords
+    Write-Host ""
+    Write-Host "Creating category files..." -ForegroundColor Cyan
+    $categoriesFolder = Join-Path $paperReviewRoot "categories"
+    
+    foreach ($keyword in $keywords) {
+        $keywordSlug = To-CategorySlug -Category $keyword
+        if ([string]::IsNullOrWhiteSpace($keywordSlug)) {
+            continue
+        }
+
+        $categoryFile = Join-Path $categoriesFolder "$keywordSlug.md"
+        
+        if (-not (Test-Path $categoryFile)) {
+            $categoryContent = @"
+---
+layout: category
+title: $keyword
+permalink: /category/$keywordSlug
+---
+"@
+            $categoryContent | Out-File -FilePath $categoryFile -Encoding UTF8 -NoNewline
+            Write-Host "Created category: $keyword" -ForegroundColor Green
+        }
+    }
+    
+    # Also create research category if it doesn't exist
+    $researchCategoryFile = Join-Path $categoriesFolder "research.md"
+    if (-not (Test-Path $researchCategoryFile)) {
+        $researchContent = @"
+---
+layout: category
+title: research
+permalink: /category/research
+---
+"@
+        $researchContent | Out-File -FilePath $researchCategoryFile -Encoding UTF8 -NoNewline
+        Write-Host "Created category: research" -ForegroundColor Green
+    }
     
     $jekyllContent = $frontMatter + $articleContent
     
